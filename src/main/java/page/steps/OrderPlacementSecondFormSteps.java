@@ -1,4 +1,4 @@
-package pageSteps;
+package page.steps;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

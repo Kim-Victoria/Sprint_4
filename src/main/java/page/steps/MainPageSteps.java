@@ -1,17 +1,22 @@
-package pageSteps;
-import org.openqa.selenium.*;
-import pages.ImportantQuestions;
+package page.steps;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.List;
 
-
-public class ImportantQuestionsSteps {
+public class MainPageSteps {
     private WebDriver driver;
-    private ImportantQuestions importantQuestions;
     private By questionsSection = By.className("accordion__item"); // локатор для поиска раздела с вопросами
+    private By answerSection = By.className("accordion__panel"); // локатор для поиска ответа
 
-    public ImportantQuestionsSteps(WebDriver driver) {
+    public MainPageSteps(WebDriver driver) {
         this.driver = driver;
-        importantQuestions = new ImportantQuestions(driver);
     }
 
     // получить список всех вопросов
@@ -30,10 +35,11 @@ public class ImportantQuestionsSteps {
         List<WebElement> questions = getAllQuestions();
         questions.get(index).click();
     }
-
-    // Получить текст ответа
+// получить текст ответа
     public String getAnswerText(int index) {
-        WebElement answerElement = driver.findElement(By.xpath("//*[@id='accordion__panel-" + index + "']"));
-        return answerElement.getText();
+        List<WebElement> questions = getAllQuestions();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(questionsSection));
+        return questions.get(index).findElement(answerSection).getText();
     }
 }

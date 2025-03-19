@@ -1,7 +1,9 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import pageSteps.*;
+import page.steps.FinalConfirmationPageSteps;
+import page.steps.OrderPlacementFirstFormSteps;
+import page.steps.OrderPlacementSecondFormSteps;
 
 @RunWith(Parameterized.class)
 public class OrderPlacementTest extends BaseTest {
@@ -33,10 +35,6 @@ public class OrderPlacementTest extends BaseTest {
 
     @Test
     public void OrderPlacementTest() {
-        // открываем главную страницу
-        MainPageSteps objMainPageSteps = new MainPageSteps(driver);
-        objMainPageSteps.openPage();
-        objMainPageSteps.closeCookies();
         // заполняем первую форму оформления заказа
         OrderPlacementFirstFormSteps objOrderPlacementSteps = new OrderPlacementFirstFormSteps(driver);
         objOrderPlacementSteps.clickOrderButton(buttonLocation);
